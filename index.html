@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lagging Video with Virus Warning</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: black;
+            color: white;
+            font-family: monospace;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+        #video-container {
+            position: relative;
+            width: 80%;
+            max-width: 800px;
+            border: 5px solid limegreen;
+            box-shadow: 0 0 15px limegreen;
+            z-index: 1;
+        }
+        video {
+            width: 100%;
+            height: auto;
+        }
+        #virus-warning {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            color: red;
+            font-size: 24px;
+            padding: 20px;
+            text-align: center;
+            z-index: 1000;
+            border: 5px solid red;
+            box-shadow: 0 0 15px red;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+    <div id="video-container">
+        <video id="video" controls>
+            <source src="E:\code hack\vdtroll\Download.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+    <div id="virus-warning">
+        CẢNH BÁO: Video này có chứa vi-rút và đã xâm phạm hệ thống của bạn!
+    </div>
+
+    <script>
+        function showWarning() {
+            const warning = document.getElementById('virus-warning');
+            warning.style.display = 'flex';
+            setTimeout(() => {
+                warning.style.opacity = 1;
+            }, 100); // Hiệu ứng chuyển tiếp sau 100ms
+        }
+
+        function simulateLag() {
+            const video = document.getElementById('video');
+            const lagTimes = [200, 300, 500, 1000]; // Thời gian tạm dừng ngẫu nhiên (ms)
+            let lagInterval = 0;
+
+            const lagEffect = setInterval(() => {
+                // Dừng video ngẫu nhiên
+                if (Math.random() < 0.5) {
+                    video.pause();
+                    setTimeout(() => {
+                        video.play();
+                    }, lagTimes[Math.floor(Math.random() * lagTimes.length)]); // Thời gian lag ngẫu nhiên
+                }
+                lagInterval += 500; // Mỗi lần lag sau 500ms
+                if (lagInterval > 10000) { // Kết thúc lag sau 5 giây
+                    clearInterval(lagEffect);
+                }
+            }, 500);
+        }
+
+        // Khi trang tải xong, bắt đầu hiệu ứng lag và thông báo
+        window.onload = function() {
+            simulateLag();
+            setTimeout(showWarning, 7000); // Hiển thị thông báo sau 5 giây
+        };
+    </script>
+</body>
+</html>
+<!DOCTYPE html>
+<html>
+<body>
+<h1>Hello World</h1>
+<p>I'm hosted with GitHub Pages.</p>
+</body>
+</html>
